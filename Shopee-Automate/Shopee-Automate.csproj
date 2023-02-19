@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
+    <RootNamespace>Shopee_Automate</RootNamespace>
+    <UseWindowsForms>True</UseWindowsForms>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <NeutralLanguage>zh-TW</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="PuppeteerSharp" Version="9.0.2" />
+  </ItemGroup>
+
+</Project>
