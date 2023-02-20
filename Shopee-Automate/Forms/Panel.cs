@@ -15,6 +15,7 @@ namespace Shopee_Automate.Forms
     public partial class Panel : Form
     {
         private SetAccount _setAccount;
+        private DiscordWebhookSetup _discordWebhookSetup;
 
         private string LoginInfoFile = Util.LoginInfoPath;
 
@@ -34,7 +35,11 @@ namespace Shopee_Automate.Forms
             } else
             {
                 this.start.Enabled = false;
+                this.setAuto.Enabled = false;
+                this.unsetAuto.Enabled = false;
             }
+
+            if (!File.Exists(Util.CookiesPath)) this.removeCookies.Enabled = false;
         }
 
         private void setLoginInformation_Click(object sender, EventArgs e)
@@ -51,6 +56,8 @@ namespace Shopee_Automate.Forms
                 File.WriteAllText(LoginInfoFile, String.Format("{0}:{1}", ShopeeUsername, ShopeePassword));
 
                 this.start.Enabled = true;
+                this.setAuto.Enabled = true;
+                this.unsetAuto.Enabled = true;
             }
             else if (dl == DialogResult.Cancel)
             {
@@ -82,6 +89,31 @@ namespace Shopee_Automate.Forms
         {
             if (File.Exists(Util.CookiesPath)) File.Delete(Util.CookiesPath);
             Console.WriteLine("已刪除登入Cookies");
+        }
+
+        private void generateBAT_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Batch File|*.bat";
+            sfd.Title = "儲存啟動BAT檔案";
+            sfd.ShowDialog();
+
+            if (sfd.FileName != "")
+            {
+                FileStream fs = (FileStream)sfd.OpenFile();
+                byte[] strings = Encoding.UTF8.GetBytes(String.Format("{0} nogui", Program.ExecutePath));
+                foreach (byte str in strings)
+                {
+                    fs.WriteByte(str);
+                }
+                fs.Close();
+            }
+        }
+
+        private void setDiscordWebhook_Click(object sender, EventArgs e)
+        {
+            _discordWebhookSetup = new DiscordWebhookSetup();
+            _discordWebhookSetup.ShowDialog();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Shopee_Automate
         public static string TOO_MUCH_TRY = "您已達到今日驗證次數上限。";
         public static string SHOPEE_REWARD = "蝦幣獎勵";
         public static string SHOPEE_ALREADY = "明天再回來領取";
+        public static string SHOPEE_CAN_GET = "今日簽到獲得";
         public static string VERIFICATION_DENIED = "很抱歉，您的身份驗證已遭到拒絕。";
         public static string[] WRONG_PASSWORD = {
           "你的帳號或密碼不正確，請再試一次",
@@ -27,17 +28,17 @@ namespace Shopee_Automate
         };
     }
 
-    public class StatusCode : ElementProvider
+    public enum StatusCode
     {
-        public static int SUCCESS_LOGIN = 0;
-        public static int WRONG_PASSWORD = 1;
-        public static int NEED_HUMAN = 2;
-        public static int SMS_VERIFICATION = 3;
-        public static int EMAIL_VERIFICATION = 4;
+        SUCCESS_LOGIN,
+        WRONG_PASSWORD,
+        NEED_HUMAN,
+        SMS_VERIFICATION,
+        EMAIL_VERIFICATION,
 
-        public static int ALREADY_GET = 5;
+        ALREADY_GET,
 
-        public static int UNKNOWN = -1;
+        UNKNOWN
     }
     
     public interface ElementProvider

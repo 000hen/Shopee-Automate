@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.removeCookies = new System.Windows.Forms.Button();
+            this.setDiscordWebhook = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // setLoginInformation
@@ -60,7 +61,7 @@
             // 
             // unsetAuto
             // 
-            this.unsetAuto.Location = new System.Drawing.Point(12, 186);
+            this.unsetAuto.Location = new System.Drawing.Point(176, 129);
             this.unsetAuto.Name = "unsetAuto";
             this.unsetAuto.Size = new System.Drawing.Size(158, 51);
             this.unsetAuto.TabIndex = 2;
@@ -85,12 +86,13 @@
             this.generateBAT.TabIndex = 4;
             this.generateBAT.Text = "生成執行 BAT 檔案";
             this.generateBAT.UseVisualStyleBackColor = true;
+            this.generateBAT.Click += new System.EventHandler(this.generateBAT_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(194, 9);
+            this.label1.Location = new System.Drawing.Point(192, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(325, 43);
             this.label1.TabIndex = 5;
@@ -99,11 +101,13 @@
             // richTextBox1
             // 
             this.richTextBox1.AutoWordSelection = true;
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(361, 72);
+            this.richTextBox1.Location = new System.Drawing.Point(360, 72);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(334, 165);
+            this.richTextBox1.Size = new System.Drawing.Size(336, 168);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "您好使用者!\n\n這是一個能夠讓你自動化領取蝦幣的工具。您需要先點選「設定帳號密碼」來設定這個工具的登入帳號密碼，登入成功後您可以點選「設定自動化領取」讓這個工具可" +
     "以在每天執行。\n\n我是開發者Muisnow，這是我第一次自主撰寫C#應用程式，部分代碼魔改自 https://github.com/wdzeng/shopee-" +
@@ -119,11 +123,22 @@
             this.removeCookies.UseVisualStyleBackColor = true;
             this.removeCookies.Click += new System.EventHandler(this.removeCookies_Click);
             // 
+            // setDiscordWebhook
+            // 
+            this.setDiscordWebhook.Location = new System.Drawing.Point(12, 186);
+            this.setDiscordWebhook.Name = "setDiscordWebhook";
+            this.setDiscordWebhook.Size = new System.Drawing.Size(158, 51);
+            this.setDiscordWebhook.TabIndex = 9;
+            this.setDiscordWebhook.Text = "設定Discord頻道通知";
+            this.setDiscordWebhook.UseVisualStyleBackColor = true;
+            this.setDiscordWebhook.Click += new System.EventHandler(this.setDiscordWebhook_Click);
+            // 
             // Panel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 341);
+            this.Controls.Add(this.setDiscordWebhook);
             this.Controls.Add(this.removeCookies);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -153,5 +168,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button removeCookies;
+        private System.Windows.Forms.Button setDiscordWebhook;
     }
 }

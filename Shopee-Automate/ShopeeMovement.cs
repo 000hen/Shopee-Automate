@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PuppeteerSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,24 +44,25 @@ namespace Shopee_Automate
             var loginBtn = await bso.XPathSeletorWait(Util.XPathByText("button", ElementObjects.BUTTON_LOGIN_TEXT));
             await loginBtn.ClickAsync();
 
-            int status = await CheckLoginPage();
+            StatusCode status = await CheckLoginPage();
 
-            if (status == StatusCode.WRONG_PASSWORD || status == StatusCode.NEED_HUMAN) return false;
-
-            if (status == StatusCode.SMS_VERIFICATION)
+            switch (status)
             {
-                return await VerifcationViaSMS();
-            }
+                case StatusCode.WRONG_PASSWORD:
+                case StatusCode.NEED_HUMAN:
+                    return false;
 
-            if (status == StatusCode.EMAIL_VERIFICATION)
-            {
-                return await VerificationViaEmail();
+                case StatusCode.SMS_VERIFICATION:
+                    return await VerifcationViaSMS();
+
+                case StatusCode.EMAIL_VERIFICATION:
+                    return await VerificationViaEmail();
             }
 
             return true;
         }
 
-        private async Task<int> CheckLoginPage()
+        private async Task<StatusCode> CheckLoginPage()
         {
             PuppeteerSharp.IElementHandle[] result;
 
@@ -143,7 +145,7 @@ namespace Shopee_Automate
                 await Task.Delay(500);
             }
 
-            if (await bso.XPathSeletorWait(Util.XPathByText("div", ElementObjects.TOO_MUCH_TRY)) != null)
+            if ((await bso.XPathSeletor(Util.XPathByText("div", ElementObjects.TOO_MUCH_TRY))).Length > 0)
             {
                 Console.WriteLine("無法使用簡訊驗證登入: 已達到當日最高驗證次數");
                 return false;
@@ -167,6 +169,25 @@ namespace Shopee_Automate
             Console.WriteLine("已發送郵件，請檢查您的信箱。一旦您點擊驗證連結，此自動化工具將會繼續執行。");
 
             return await CheckVerification();
+        }
+
+        public async Task<bool> GetDailyCoin()
+        {
+            IElementHandle d = await bso.XPathSeletorWait(Util.GetCoinXpath());
+            bool isCanGet = (await d.EvaluateFunctionAsync<string>("e => e.innerHTML")).Contains(ElementObjects.SHOPEE_CAN_GET);
+
+            if (isCanGet)
+            {
+                Console.WriteLine("可領取當然蝦幣，正在領取中...");
+                await d.ClickAsync();
+                await bso.XPathSeletorWait(Util.XPathByText("button", ElementObjects.SHOPEE_ALREADY));
+
+                return true;
+            } else
+            {
+                Console.WriteLine("已領取過當日蝦幣了!");
+                return false;
+            }
         }
     }
 }

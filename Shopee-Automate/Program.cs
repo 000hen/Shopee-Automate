@@ -12,6 +12,8 @@ namespace Shopee_Automate
 {
     class Program
     {
+        public static string ExecutePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+
         private static BrowserObject bso = new();
 
         [STAThread]
@@ -31,7 +33,7 @@ namespace Shopee_Automate
             {
                 if (args[0] == "help")
                 {
-                    string fileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                    string fileName = ExecutePath;
 
                     Console.WriteLine(String.Format("Usage:\n\t{0} <USERNAME> <PASSWORD> <COOKIES PATH>", fileName));
                     _ = Exit(0);
@@ -113,6 +115,12 @@ namespace Shopee_Automate
             }
 
             Util.SaveAsJson(Util.CookiesPath, await bso.GetCookies());
+
+            await spm.GetDailyCoin();
+
+            Console.WriteLine("已完成操作!");
+
+            await Task.Delay(3000);
 
             _ = Exit(0);
         }

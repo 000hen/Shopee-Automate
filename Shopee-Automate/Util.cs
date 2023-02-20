@@ -11,7 +11,7 @@ namespace Shopee_Automate
 {
     class Util
     {
-        public static string CurrentPath = Directory.GetCurrentDirectory();
+        public static string CurrentPath = Path.GetDirectoryName(Program.ExecutePath);
         public static string LoginInfoPath = CurrentPath + "/login";
         public static string CookiesPath = CurrentPath + "/cookies";
 
@@ -30,12 +30,21 @@ namespace Shopee_Automate
 
             xpaths.Add(XPathByText("button", ElementObjects.PLAY_PUZZLE));
             xpaths.Add(XPathByText("button", ElementObjects.SHOPEE_ALREADY));
+            xpaths.Add(XPathByText("div", ElementObjects.USE_EMAIL));
             xpaths.Add(XPathByText("div", ElementObjects.USE_LINK));
             xpaths.Add(XPathByText("div", ElementObjects.TOO_MUCH_TRY));
             xpaths.Add(XPathByText("div", ElementObjects.SHOPEE_REWARD));
-            xpaths.Add(XPathByText("div", ElementObjects.USE_EMAIL));
 
             return String.Join("|", xpaths.ToArray());
+        }
+
+        public static string GetCoinXpath()
+        {
+            return String.Join("|", new List<string>
+            {
+                XPathByText("button", ElementObjects.SHOPEE_ALREADY),
+                XPathByText("button", ElementObjects.SHOPEE_CAN_GET)
+            });
         }
 
         public static string[] ReadAccountInfo()
