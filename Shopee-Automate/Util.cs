@@ -55,6 +55,7 @@ namespace Shopee_Automate
 
         public static string GetDiscordWebhookInfo()
         {
+            if (!CheckDiscordWebhookFile()) return null;
             return File.ReadAllText(DiscordWebhookPath);
         }
 
@@ -65,6 +66,7 @@ namespace Shopee_Automate
 
         public static string[] ReadAccountInfo()
         {
+            if (!CheckAccountFile()) return null;
             return File.ReadAllText(LoginInfoPath).Split(":");
         }
 
