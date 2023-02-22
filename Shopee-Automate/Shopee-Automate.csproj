@@ -6,8 +6,8 @@
     <RootNamespace>Shopee_Automate</RootNamespace>
     <UseWindowsForms>True</UseWindowsForms>
     <NeutralLanguage>zh-TW</NeutralLanguage>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <!--<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>-->
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,9 +2,8 @@ name: .NET Release
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -29,7 +28,7 @@ jobs:
         Rename-Item "Release" "Shopee-Automate"
         tar.exe -a -c -f Shopee-Automate.zip Shopee-Automate
 
-    - name: Upload AAB Asset
+    - name: Upload Asset
       uses: actions/upload-artifact@v1
       with:
         name: Shopee-Automate.zip

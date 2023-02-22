@@ -119,13 +119,20 @@ namespace Shopee_Automate
         {
             while (true)
             {
-                if ((await bso.XPathSeletor(Util.XPathByText("div", ElementObjects.VERIFICATION_DENIED))).Length != 0)
+                try
                 {
-                    Console.WriteLine("自動化工具被拒絕驗證登入。請稍後再嘗試一次。");
-                    return false;
+                    if ((await bso.XPathSeletor(Util.XPathByText("div", ElementObjects.VERIFICATION_DENIED))).Length != 0)
+                    {
+                        Console.WriteLine("自動化工具被拒絕驗證登入。請稍後再嘗試一次。");
+                        return false;
+                    }
+                } catch (Exception)
+                {
+                    await Task.Delay(500);
+                    continue;
                 }
 
-                if (bso.GetCurrentURL() == ShopeeCoinURL)
+                if (bso.GetCurrentURL() == ShopeeCoinAuthURL)
                 {
                     Console.WriteLine("驗證成功!");
                     return true;

@@ -16,12 +16,14 @@ namespace Shopee_Automate
 
         private DiscordWebhookClient _client;
 
-        public DiscordWebhooker(string? webhookURL)
+#nullable enable
+        public DiscordWebhooker(string? webhookURL) 
         {
             if (webhookURL == null && Util.CheckDiscordWebhookFile()) webhookURL = Util.GetDiscordWebhookInfo();
             else if (webhookURL == null && !Util.CheckDiscordWebhookFile()) throw new ArgumentException("webhookURL cannot be null if there didn't have discordhook file.");
             _client = new DiscordWebhookClient(webhookURL);
         }
+#nullable disable
 
         public async Task SendTest()
         {

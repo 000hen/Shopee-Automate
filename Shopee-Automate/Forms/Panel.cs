@@ -14,9 +14,9 @@ namespace Shopee_Automate.Forms
 {
     public partial class Panel : Form
     {
-        private static SetAccount _setAccount = new SetAccount();
-        private static DiscordWebhookSetup _discordWebhookSetup = new DiscordWebhookSetup();
-        private static ScheduleTimeSet _scheduleTimeSet = new ScheduleTimeSet();
+        private SetAccount _setAccount;
+        private DiscordWebhookSetup _discordWebhookSetup;
+        private ScheduleTimeSet _scheduleTimeSet;
 
         private static Scheduler _scheduler = new Scheduler();
 
@@ -33,6 +33,9 @@ namespace Shopee_Automate.Forms
 
                 ShopeeUsername = data[0];
                 ShopeePassword = data[1];
+
+                if (!_scheduler.CheckTaskExists()) this.unsetAuto.Enabled = false;
+                else this.setAuto.Enabled = false;
             } else
             {
                 this.start.Enabled = false;
@@ -40,19 +43,12 @@ namespace Shopee_Automate.Forms
                 this.unsetAuto.Enabled = false;
             }
 
-            if (!_scheduler.CheckTaskExists())
-            {
-                this.unsetAuto.Enabled = false;
-            } else
-            {
-                this.setAuto.Enabled = false;
-            }
-
             if (!File.Exists(Util.CookiesPath)) this.removeCookies.Enabled = false;
         }
 
         private void setLoginInformation_Click(object sender, EventArgs e)
         {
+            _setAccount = new SetAccount();
             DialogResult dl = _setAccount.ShowDialog();
 
             if (dl == DialogResult.OK)
@@ -64,8 +60,8 @@ namespace Shopee_Automate.Forms
                 File.WriteAllText(Util.LoginInfoPath, String.Format("{0}:{1}", ShopeeUsername, ShopeePassword));
 
                 this.start.Enabled = true;
-                this.setAuto.Enabled = true;
-                this.unsetAuto.Enabled = true;
+                if (_scheduler.CheckTaskExists()) this.unsetAuto.Enabled = true;
+                else this.setAuto.Enabled = true;
             }
             else if (dl == DialogResult.Cancel)
             {
@@ -76,6 +72,7 @@ namespace Shopee_Automate.Forms
 
         private void setAuto_Click(object sender, EventArgs e)
         {
+            _scheduleTimeSet = new ScheduleTimeSet();
             DialogResult dl = _scheduleTimeSet.ShowDialog();
 
             if (dl == DialogResult.OK)
@@ -103,10 +100,7 @@ namespace Shopee_Automate.Forms
         private void start_Click(object sender, EventArgs e)
         {
             Close();
-            if (ShopeeUsername == null || ShopeePassword == null)
-            {
-                return;
-            }
+            if (ShopeeUsername == null || ShopeePassword == null) return;
 
             Task.Run(async () =>
             {
@@ -143,6 +137,7 @@ namespace Shopee_Automate.Forms
 
         private void setDiscordWebhook_Click(object sender, EventArgs e)
         {
+            _discordWebhookSetup = new DiscordWebhookSetup();
             DialogResult dl = _discordWebhookSetup.ShowDialog();
 
             if (dl == DialogResult.OK)

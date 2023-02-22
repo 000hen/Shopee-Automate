@@ -35,7 +35,7 @@ namespace Shopee_Automate.Forms
                 _discordWebhook = new DiscordWebhooker(this.webhookInput.Text);
                 await _discordWebhook.SendTest();
                 Console.WriteLine("成功發送測試用訊息!");
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 Console.WriteLine("無法發送測試用訊息! 可能是您的Webhook連結無效。");
 
