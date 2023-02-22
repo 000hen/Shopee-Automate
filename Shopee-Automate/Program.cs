@@ -12,7 +12,7 @@ namespace Shopee_Automate
 {
     class Program
     {
-        public static string ExecutePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+        public static string ExecutePath = Environment.ProcessPath;
 
         private static BrowserObject bso = new();
 
