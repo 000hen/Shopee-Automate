@@ -2,8 +2,8 @@ name: .NET Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - "master"
 
 jobs:
   build:
@@ -38,6 +38,7 @@ jobs:
       id: create_release
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
         prerelease: false
 
     - name: Upload Asset
