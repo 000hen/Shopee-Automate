@@ -26,7 +26,7 @@ jobs:
       run: |
         dotnet build --configuration Release --no-restore
         cd Shopee-Automate\bin
-        rename Release Shopee-Automate
+        Rename-Item "Release" "Shopee-Automate""
         tar.exe -a -c -f Shopee-Automate.zip Shopee-Automate
 
     - name: Upload AAB Asset
