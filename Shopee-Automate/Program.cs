@@ -116,7 +116,17 @@ namespace Shopee_Automate
 
             Util.SaveAsJson(Util.CookiesPath, await bso.GetCookies());
 
-            await spm.GetDailyCoin();
+            status = await spm.GetDailyCoin();
+
+            if (Util.CheckDiscordWebhookFile())
+            {
+                DiscordWebhooker dwh = new DiscordWebhooker(Util.GetDiscordWebhookInfo());
+                await dwh.SendEmbed(new JNogueira.Discord.Webhook.Client.DiscordMessageEmbed(
+                    DiscordWebhooker.DiscordUserName,
+                    description: status ? "已成功領取蝦幣!" : "今天已領取過蝦幣了，所以尚未有操作",
+                    color: DiscordWebhooker.DiscordEmbedColor
+                ));
+            }
 
             Console.WriteLine("已完成操作!");
 

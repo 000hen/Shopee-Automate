@@ -12,9 +12,17 @@ namespace Shopee_Automate.Forms
 {
     public partial class SetAccount : Form
     {
+        private string[] DefaultAccount = Util.ReadAccountInfo();
+
         public SetAccount()
         {
             InitializeComponent();
+
+            if (DefaultAccount != null && DefaultAccount.Length == 2)
+            {
+                this.username.Text = DefaultAccount[0];
+                this.password.Text = DefaultAccount[1];
+            }
         }
 
         private void username_TextChanged(object sender, EventArgs e)

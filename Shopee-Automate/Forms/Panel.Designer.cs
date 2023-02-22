@@ -67,6 +67,7 @@
             this.unsetAuto.TabIndex = 2;
             this.unsetAuto.Text = "解除自動化領取";
             this.unsetAuto.UseVisualStyleBackColor = true;
+            this.unsetAuto.Click += new System.EventHandler(this.unsetAuto_Click);
             // 
             // start
             // 

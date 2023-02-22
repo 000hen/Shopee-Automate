@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Shopee_Automate.Forms
 {
     public partial class DiscordWebhookSetup : Form
     {
-        private HttpClient _httpClient = new HttpClient();
+        private DiscordWebhooker _discordWebhook;
 
         public DiscordWebhookSetup()
         {
             InitializeComponent();
 
+            if (Util.CheckDiscordWebhookFile()) this.webhookInput.Text = Util.GetDiscordWebhookInfo();
             if (this.webhookInput.Text.Trim().Length == 0 )
             {
                 this.sendTestMessage.Enabled = false;
@@ -28,24 +30,12 @@ namespace Shopee_Automate.Forms
 
         private async void sendTestMessage_Click(object sender, EventArgs e)
         {
-            string value = JsonConvert.SerializeObject(new
+            try
             {
-                embeds = new List<object>
-                {
-                    new
-                    {
-                        type = "rich",
-                        title = "Shopee-Automate",
-                        description = "測試訊息",
-                        color = 0x276fff
-                    }
-                }
-            });
-            var response = await _httpClient.PostAsync(this.webhookInput.Text, new StringContent(value, Encoding.UTF8, "application/json"));
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
+                _discordWebhook = new DiscordWebhooker(this.webhookInput.Text);
+                await _discordWebhook.SendTest();
                 Console.WriteLine("成功發送測試用訊息!");
-            } else
+            } catch (Exception ex)
             {
                 Console.WriteLine("無法發送測試用訊息! 可能是您的Webhook連結無效。");
 

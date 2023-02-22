@@ -14,6 +14,7 @@ namespace Shopee_Automate
         public static string CurrentPath = Path.GetDirectoryName(Program.ExecutePath);
         public static string LoginInfoPath = CurrentPath + "/login";
         public static string CookiesPath = CurrentPath + "/cookies";
+        public static string DiscordWebhookPath = CurrentPath + "/discordhook";
 
         public static string XPathByText(string queryElement, string text)
         {
@@ -45,6 +46,21 @@ namespace Shopee_Automate
                 XPathByText("button", ElementObjects.SHOPEE_ALREADY),
                 XPathByText("button", ElementObjects.SHOPEE_CAN_GET)
             });
+        }
+
+        public static bool CheckDiscordWebhookFile()
+        {
+            return File.Exists(DiscordWebhookPath);
+        }
+
+        public static string GetDiscordWebhookInfo()
+        {
+            return File.ReadAllText(DiscordWebhookPath);
+        }
+
+        public static bool CheckAccountFile()
+        {
+            return File.Exists(LoginInfoPath);
         }
 
         public static string[] ReadAccountInfo()

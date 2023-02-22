@@ -1,6 +1,8 @@
-﻿namespace Shopee_Automate.Forms
+﻿using System;
+
+namespace Shopee_Automate.Forms
 {
-    partial class DiscordWebhookSetup
+    partial class ScheduleTimeSet
     {
         /// <summary>
         /// Required designer variable.
@@ -28,44 +30,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.timePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.webhookInput = new System.Windows.Forms.TextBox();
-            this.sendTestMessage = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
             this.submit = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // timePicker
+            // 
+            this.timePicker.CustomFormat = "tt hh:mm:ss";
+            this.timePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timePicker.Location = new System.Drawing.Point(164, 24);
+            this.timePicker.Name = "timePicker";
+            this.timePicker.ShowUpDown = true;
+            this.timePicker.Size = new System.Drawing.Size(115, 23);
+            this.timePicker.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 27);
+            this.label1.Location = new System.Drawing.Point(26, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(232, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Discord Webhook 連結:";
-            // 
-            // webhookInput
-            // 
-            this.webhookInput.Location = new System.Drawing.Point(250, 29);
-            this.webhookInput.Name = "webhookInput";
-            this.webhookInput.Size = new System.Drawing.Size(363, 23);
-            this.webhookInput.TabIndex = 1;
-            this.webhookInput.TextChanged += new System.EventHandler(this.webhookInput_TextChanged);
-            // 
-            // sendTestMessage
-            // 
-            this.sendTestMessage.Location = new System.Drawing.Point(12, 64);
-            this.sendTestMessage.Name = "sendTestMessage";
-            this.sendTestMessage.Size = new System.Drawing.Size(138, 41);
-            this.sendTestMessage.TabIndex = 2;
-            this.sendTestMessage.Text = "發送測試用訊息";
-            this.sendTestMessage.UseVisualStyleBackColor = true;
-            this.sendTestMessage.Click += new System.EventHandler(this.sendTestMessage_Click);
+            this.label1.Size = new System.Drawing.Size(132, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "設定執行時間";
             // 
             // cancel
             // 
-            this.cancel.Location = new System.Drawing.Point(620, 93);
+            this.cancel.Location = new System.Drawing.Point(372, 66);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(73, 22);
             this.cancel.TabIndex = 7;
@@ -75,30 +68,26 @@
             // submit
             // 
             this.submit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submit.Location = new System.Drawing.Point(541, 93);
+            this.submit.Location = new System.Drawing.Point(293, 66);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(73, 22);
             this.submit.TabIndex = 6;
             this.submit.Text = "確認";
             this.submit.UseVisualStyleBackColor = true;
+            this.submit.Click += new System.EventHandler(this.submit_Click);
             // 
-            // DiscordWebhookSetup
+            // ScheduleTimeSet
             // 
-            this.AcceptButton = this.submit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancel;
-            this.ClientSize = new System.Drawing.Size(705, 127);
+            this.ClientSize = new System.Drawing.Size(457, 100);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.submit);
-            this.Controls.Add(this.sendTestMessage);
-            this.Controls.Add(this.webhookInput);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.timePicker);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "DiscordWebhookSetup";
-            this.Text = "DiscordWebhookSetup";
+            this.Name = "ScheduleTimeSet";
+            this.Text = "ScheduleTimeSet";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,9 +95,8 @@
 
         #endregion
 
+        private System.Windows.Forms.DateTimePicker timePicker;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox webhookInput;
-        private System.Windows.Forms.Button sendTestMessage;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button submit;
     }
