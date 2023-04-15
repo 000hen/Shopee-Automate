@@ -20,6 +20,17 @@ namespace Shopee_Automate
             return String.Format("//{0}[contains(text(), '{1}')]", queryElement, text);
         }
 
+        public static string XPathByText(string queryElement, string[] text)
+        {
+            List<string> a = new ();
+            foreach (string s in text)
+            {
+                a.Add(XPathByText(queryElement, s));
+            }
+
+            return String.Join("|", a);
+        }
+
         public static string GetLoginXpaths()
         {
             List<string> xpaths = new();

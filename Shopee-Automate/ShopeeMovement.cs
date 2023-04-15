@@ -81,7 +81,7 @@ namespace Shopee_Automate
                 return StatusCode.SUCCESS_LOGIN;
             }
 
-            if (rstext.Contains(ElementObjects.SHOPEE_ALREADY))
+            if (ElementObjects.SHOPEE_ALREADY.Any(rstext.Contains))
             {
                 Console.WriteLine("登入成功! 已領取過蝦幣了!");
                 return StatusCode.ALREADY_GET;
@@ -181,7 +181,7 @@ namespace Shopee_Automate
         public async Task<bool> GetDailyCoin()
         {
             IElementHandle d = await bso.XPathSeletorWait(Util.GetCoinXpath());
-            bool isCanGet = (await d.EvaluateFunctionAsync<string>("e => e.innerHTML")).Contains(ElementObjects.SHOPEE_CAN_GET);
+            bool isCanGet = ElementObjects.SHOPEE_CAN_GET.Any((await d.EvaluateFunctionAsync<string>("e => e.innerHTML")).Contains);
 
             if (isCanGet)
             {

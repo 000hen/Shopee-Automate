@@ -18,8 +18,16 @@ namespace Shopee_Automate
         public static string USE_EMAIL = "透過電子郵件連結驗證";
         public static string TOO_MUCH_TRY = "您已達到今日驗證次數上限。";
         public static string SHOPEE_REWARD = "蝦幣獎勵";
-        public static string SHOPEE_ALREADY = "明天再回來領取";
-        public static string SHOPEE_CAN_GET = "今日簽到獲得";
+        public static string[] SHOPEE_ALREADY = {
+            "明天再回來領取",
+            "明天再回來",
+            "明天再回來簽到"
+        };
+        public static string[] SHOPEE_CAN_GET = {
+            "今日簽到獲得",
+            "完成簽到",
+            "獲得"
+        };
         public static string VERIFICATION_DENIED = "很抱歉，您的身份驗證已遭到拒絕。";
         public static string[] WRONG_PASSWORD = {
           "你的帳號或密碼不正確，請再試一次",

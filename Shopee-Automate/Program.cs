@@ -120,7 +120,7 @@ namespace Shopee_Automate
 
             if (Util.CheckDiscordWebhookFile())
             {
-                DiscordWebhooker dwh = new DiscordWebhooker(Util.GetDiscordWebhookInfo());
+                DiscordWebhooker dwh = new DiscordWebhooker(null);
                 await dwh.SendEmbed(new JNogueira.Discord.Webhook.Client.DiscordMessageEmbed(
                     DiscordWebhooker.DiscordUserName,
                     description: status ? "已成功領取蝦幣!" : "今天已領取過蝦幣了，所以尚未有操作",
