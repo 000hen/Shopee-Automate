@@ -78,8 +78,10 @@ namespace Shopee_Automate.Forms
             // 
             // ScheduleTimeSet
             // 
+            this.AcceptButton = this.submit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancel;
             this.ClientSize = new System.Drawing.Size(457, 100);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.submit);

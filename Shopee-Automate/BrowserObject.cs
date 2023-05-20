@@ -20,13 +20,24 @@ namespace Shopee_Automate
 
             _browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = true
+                Headless = true,
+                Args = new[] {
+                    "--disable-dev-shm-usage",
+                    "--disable-gpu",
+                    "--user-agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36\"",
+                    "--disable-blink-features",
+                    "--disable-blink-features=AutomationControlled"
+                },
             });
             _page = await _browser.NewPageAsync();
         }
 
         public async Task LoadPage(string URL)
         {
+            await SendDevToolsCommand("Page.addScriptToEvaluateOnNewDocument", new DevToolsScript()
+            {
+                source = "Object.defineProperty(navigator, 'webdriver', { get: () => undefined })"
+            });
             await _page.GoToAsync(URL);
         }
 
@@ -79,6 +90,22 @@ namespace Shopee_Automate
         public async Task<CookieParam[]> GetCookies()
         {
             return await _page.GetCookiesAsync(GetCurrentURL());
+        }
+
+        public async Task ExecuteJavascriptOnNewDocument(string script)
+        {
+            await _page.EvaluateExpressionOnNewDocumentAsync(script);
+        }
+
+        public async Task SendDevToolsCommand(string command, DevToolsScript script)
+        {
+            var client = await _page.Target.CreateCDPSessionAsync();
+            await client.SendAsync(command, script);
+        }
+
+        public async Task ExecuteJavascript(string script)
+        {
+            await _page.EvaluateExpressionAsync(script);
         }
 
         public async Task SetCookies(CookieParam cookies)

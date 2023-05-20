@@ -55,7 +55,7 @@
             this.setAuto.Name = "setAuto";
             this.setAuto.Size = new System.Drawing.Size(158, 51);
             this.setAuto.TabIndex = 1;
-            this.setAuto.Text = "設定自動登入";
+            this.setAuto.Text = "設定自動領取";
             this.setAuto.UseVisualStyleBackColor = true;
             this.setAuto.Click += new System.EventHandler(this.setAuto_Click);
             // 

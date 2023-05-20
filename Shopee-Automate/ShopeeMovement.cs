@@ -180,6 +180,10 @@ namespace Shopee_Automate
 
         public async Task<bool> GetDailyCoin()
         {
+            await Task.Delay(1000);
+
+            await bso.LoadPage(ShopeeCoinURL);
+
             IElementHandle d = await bso.XPathSeletorWait(Util.GetCoinXpath());
             bool isCanGet = ElementObjects.SHOPEE_CAN_GET.Any((await d.EvaluateFunctionAsync<string>("e => e.innerHTML")).Contains);
 

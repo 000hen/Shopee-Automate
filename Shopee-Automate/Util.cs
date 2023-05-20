@@ -99,4 +99,9 @@ namespace Shopee_Automate
         public bool Secure { get; set; }
         public bool Session { get; set; }
     }
+
+    public class DevToolsScript
+    {
+        public string source { get; set; }
+    }
 }

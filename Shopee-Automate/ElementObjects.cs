@@ -25,8 +25,7 @@ namespace Shopee_Automate
         };
         public static string[] SHOPEE_CAN_GET = {
             "今日簽到獲得",
-            "完成簽到",
-            "獲得"
+            "完成簽到"
         };
         public static string VERIFICATION_DENIED = "很抱歉，您的身份驗證已遭到拒絕。";
         public static string[] WRONG_PASSWORD = {
